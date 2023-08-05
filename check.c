@@ -14,7 +14,7 @@ void printFormat(Format *format){
 int inCorrectFormat(Format *format){
     for(int i = 1; i < 10; i++){
         if(format->formats[i] == 't' && format->formats[i-1] == 'f')
-            return 0;
+            return 1;
     }
-    return 1;
+    return 0;
 }

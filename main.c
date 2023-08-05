@@ -5,15 +5,19 @@
 
 int main(int args, char** argv) {
     FILE * inputFile;
-    char buffer[BUFFERSIZE];
-    char lineBuffer[BUFFERSIZE];
-    int index = 0, linenumber = 1;
+    char buffer[BUFFERSIZE]={0};
+    char lineBuffer[BUFFERSIZE]={0};
+    int  linenumber = 1;
     char inputCharacter;
     Format gameFormat;
     memset(gameFormat.formats, 'f', 10);
 
     if(args > 1){
         inputFile = fopen(argv[1], "r");
+        if(inputFile == NULL){
+            fprintf(stderr, "File %s not found", argv[1]);
+            return 1;
+        }
     }
     else{
         inputFile = stdin;
@@ -25,17 +29,20 @@ int main(int args, char** argv) {
             if(inputCharacter == '#')
                 break;
             else{
-                lineBuffer[index++] = inputCharacter;
+                lineBuffer[i] = buffer[i];
             }
         }
-        if(strstr(lineBuffer,"RULES:") == 0){
+        if(strstr(lineBuffer,"RULES:") != NULL){
             gameFormat.formats[rules] = 't';
         }
-        else if(strstr(lineBuffer, "turn 1") == 0 || strstr(lineBuffer, "turn 3") ==0){
+        else if(strstr(lineBuffer, "turn 1") != NULL || strstr(lineBuffer, "turn 3") != NULL){
             gameFormat.formats[cardTurns] = 't';
         }
         memset(lineBuffer, 0, BUFFERSIZE);
-        index = 0;
+        if(inCorrectFormat(&gameFormat)){
+            fprintf(stderr, "Format incorrect at line %d ", linenumber);
+            return 1;
+        }
         linenumber++;
     }
     printFormat(&gameFormat);
