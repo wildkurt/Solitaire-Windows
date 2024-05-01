@@ -15,4 +15,6 @@ typedef struct Card{
 int isRedCard(Card temp);
 int isBlackCard(Card temp);
 int cardRankValue(Card temp);
+int isValidRank(char c);
+
 #endif //SOLITAIRE_WINDOWS_CARD_H

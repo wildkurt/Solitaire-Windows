@@ -2,6 +2,7 @@
 // Created by wende on 4/30/2024.
 //
 
+#include <string.h>
 #include "card.h"
 int isRedCard(Card temp){
     if(temp.suit == 'd' || temp.suit == 'h')
@@ -30,4 +31,11 @@ int cardRankValue(Card temp){
         case 'K' : return 13;
         default : return 0;
     }
+}
+
+int isValidRank(char c){
+    char *validRanks = "A23456789TJQK";
+    if(strchr(validRanks, c) != 0)
+        return 1;
+    return 0;
 }

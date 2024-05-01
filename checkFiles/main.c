@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <string.h>
+#include <stdlib.h>
 #include "check.h"
 #include "commonFiles/gameConfiguration.h"
 
@@ -21,7 +21,9 @@ int main(int args, char** argv) {
     }
 
     if(!getGameConfigurationFromFile(fileptr, &line, &game)){
-
+        exit(1);
     }
+    printGameConfigurationToScreen(&game);
+    fclose(fileptr);
     return 0;
 }

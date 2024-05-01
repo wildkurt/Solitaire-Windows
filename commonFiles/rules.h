@@ -10,5 +10,6 @@ typedef struct Rules{
     int wasteResetLimit;
 }Rules;
 
-int getRules(FILE *fileptr, int *line, Rules *rules);
+int getRules(FILE *fileptr, int *line, Rules *rules, char *buffer, char *cleanBuffer);
+void printRulesToScreen(Rules *rules);
 #endif //SOLITAIRE_WINDOWS_RULES_H
